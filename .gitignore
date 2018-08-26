@@ -1,4 +1,5 @@
 *.hot-update.json
+*.hot-update.js
 
 # Created by https://www.gitignore.io/api/node
 
