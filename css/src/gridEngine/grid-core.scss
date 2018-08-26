@@ -1,0 +1,136 @@
+//@import "compass";
+
+//@import "panel";
+
+$grid_division:12;
+$row_division:4; // 0 or number
+$multiple_grid_division: true;
+$size_responsive: (
+	//name
+	"xs"		320px,
+	"s"			640px,
+	"m"			768px,
+	"l"			1024px
+);
+
+
+$gap-columns:10px;
+$gap-rows:0px;
+
+$max-template-rows:$row_division;
+$max-template-cols:$grid_division;
+
+@supports (display: grid) {
+
+	
+	.d-grid{
+		display: grid;	
+		grid-template: auto / repeat($grid_division, 1fr);
+		grid-column-gap: $gap-columns;
+		grid-row-gap: $gap-rows;
+	}
+	
+
+	//TEMPLATE COLS
+	@if ($multiple_grid_division == true) {
+		@for $i from 1 through $max-template-cols {
+			.grid-cols-#{$i}{
+				grid-template-columns: repeat($i, 1fr);
+			}
+		}
+	}
+	
+	//TEMPLATE ROWS
+	@if ($row_division > 0) {
+		@for $i from 1 through $max-template-rows {
+			.grid-rows-#{$i}{
+				grid-template-rows: repeat($i, 1fr);
+			}
+		}
+	}
+	
+	//CHILD COL AND ROW
+	@for $i from 1 through $grid_division {
+		.col-#{$i} {
+			grid-column-end:span $i;
+		}
+		.row-#{$i} {
+			grid-row-end:span $i;
+		}
+		//specific position
+		.col-start-#{$i} {
+			grid-column-start: #{$i};
+		}
+		.col-end-#{$i} {
+			grid-column-end: #{$i};
+		}
+		.row-start-#{$i} {
+			grid-row-start: #{$i};
+		}
+		.row-end-#{$i} {
+			grid-row-end: #{$i};
+		}
+	}
+	//FOR RESPONSIVE
+	@each $value in $size_responsive {
+		@media screen and (max-width: nth($value, 2) ) {
+			@for $i from 1 through $grid_division {
+				.col-#{nth($value, 1)}-#{$i} {
+					grid-column-end:span $i;
+				}
+				.row-#{nth($value, 1)}-#{$i} {
+					grid-row-end:span $i;
+				}
+				//specific position
+				.col-start-#{nth($value, 1)}-#{$i} {
+					grid-column-start: #{$i};
+				}
+				.col-end-#{nth($value, 1)}-#{$i} {
+					grid-column-end: #{$i};
+				}
+				.row-start-#{nth($value, 1)}-#{$i} {
+					grid-row-start: #{$i};
+				}
+				.row-end-#{nth($value, 1)}-#{$i} {
+					grid-row-end: #{$i};
+				}
+			}	
+		}
+	}
+	
+	//FLOW
+	.flow-row{
+		grid-auto-flow: row;
+	}
+	.flow-col{
+		grid-auto-flow: column;
+	}
+	.flow-dense{
+		grid-auto-flow: dense;
+	}
+	
+	$position: (
+		start,
+		end,
+		center,
+		stretch
+	);
+	@each $pos in $position {
+		//JUSTIFY FOR PARENT
+		.justify-items-#{$pos} {
+			justify-items: $pos;
+		}
+		//ALIGN FOR PARENT
+		.align-items-#{$pos} {
+			align-items: $pos;
+		}
+		//JUSTIFY FOR CHILD
+		.justify-self-#{$pos} {
+			justify-self: $pos;
+		}
+		//ALIGN FOR CHILD
+		.align-self-#{$pos} {
+			align-self: $pos;
+		}
+	}
+}
