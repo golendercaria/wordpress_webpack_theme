@@ -74,6 +74,12 @@ h3{
 	font-size: 16px;
 	color: rgb(174, 136, 12);
 }
+p{
+	font-family: sans-serif;
+	color: white;
+	line-height: 1.2;
+	font-size: 16px;
+}
 
 ul{
 	counter-reset: counter_val;
@@ -101,5 +107,10 @@ ul{
 			line-height: calc( #{$size} + 2px );
 			font-weight: bold;
 		}
+	}
+	hr{
+		border: 0;
+		border-top:2px dashed white;
+		margin-bottom: 15px;
 	}
 }

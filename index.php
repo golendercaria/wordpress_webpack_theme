@@ -12,6 +12,9 @@
 				<li>Add this theme in theme folder</li>
 				<li>Open terminal, and go in the theme directory</li>
 				<li>Execute "npm run dev"</li>
+				<hr/>
+				<li>Change CSS in css/src/ the root file is app.css</li>
+				<li>Change JS in js/src/ the root file is app.js</li>
 			</ul>
 		</div>
 		<div class="panel yellow col-12">
