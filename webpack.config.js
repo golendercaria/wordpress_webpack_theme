@@ -16,7 +16,6 @@ let domain = "http://localhost:8080/";
 let config = {
 	entry: {
 		app: './js/src/app.js',
-		//app_css: './css/src/app.scss'
 	},
 	output: {
 	filename: dev ? "./js/src/[name].js" : './js/build/[name].min.[hash].js',
@@ -49,7 +48,21 @@ let config = {
 			},
 			{
 				test: /\.(sass|scss)$/,
-				use: [ dev ? "style-loader" : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+				use: [
+					dev ? "style-loader" : MiniCssExtractPlugin.loader,
+					'css-loader',
+					{
+						loader: 'postcss-loader',
+						options: {
+							plugins: (loader) => [
+								require('autoprefixer')({
+									browsers: ['last 2 versions', 'ie > 8']
+								})
+							]
+						}	
+					},
+					'sass-loader'
+				]
 			},
 			{ 
 				test: /\.(png|jpg|gif)$/i,
@@ -67,7 +80,8 @@ let config = {
 		]
 	},
 	plugins: [
-		new CleanWebpackPlugin(['./js/build/*','./css/build/*'])
+		new CleanWebpackPlugin(['./js/build/*', './css/build/*']),
+		require('autoprefixer')
 	],
 	optimization: {
 		minimizer: [
