@@ -46,6 +46,15 @@
 				</div>
 			</div>
 		</div>
+		<div class="panel orange col-12">
+			<h2>ARRIVES</h2>
+			<div class="d-grid grid-cols-12">
+				<div class="col-4 col-m-12 d-grid grid-cols-1 justify-self-center">
+					<h3>Sprite functionnalities</h3>
+					<img src="<?php echo get_template_directory_uri(); ?>/img/puzzle.png" />
+				</div>
+			</div>
+		</div>
 	</div>
 
 

@@ -68,7 +68,16 @@ h1, h2, h3{
 }
 h2{
 	font-size: 33px;
-	color: rgb(174, 136, 12);;
+}
+.yellow{
+	h2, h3{
+		color: rgb(174, 136, 12);
+	}
+}
+.orange{
+	h2, h3{
+		color: rgb(179, 79, 20);
+	}
 }
 h3{
 	font-size: 16px;
