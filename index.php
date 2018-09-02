@@ -11,6 +11,7 @@
 			<ul>
 				<li>Add this theme in theme folder</li>
 				<li>Open terminal, and go in the theme directory</li>
+				<li>Execute "npm install"</li>
 				<li>Execute "npm run dev"</li>
 				<hr/>
 				<li>Change CSS in css/src/ the root file is app.css</li>
