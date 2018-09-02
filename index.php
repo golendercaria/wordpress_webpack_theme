@@ -26,7 +26,7 @@
 				</div>
 				<div class="col-4 col-m-12 d-grid grid-cols-1 justify-self-center">
 					<h3>SASS compiling</h3>
-					<img src="<?php echo get_template_directory_uri(); ?>/img/responsive.png" />
+					<img src="<?php echo get_template_directory_uri(); ?>/img/compile.png" />
 					
 				</div>
 				<div class="col-4 col-m-12 d-grid grid-cols-1 justify-self-center">
@@ -37,6 +37,11 @@
 				<div class="col-4 col-m-12 d-grid grid-cols-1 justify-self-center">
 					<h3>Module loader</h3>
 					<img src="<?php echo get_template_directory_uri(); ?>/img/target.png" />
+
+				</div>
+				<div class="col-4 col-m-12 d-grid grid-cols-1 justify-self-center">
+					<h3>Auto-prefixer</h3>
+					<img src="<?php echo get_template_directory_uri(); ?>/img/autoprefixer.png" />
 
 				</div>
 			</div>
