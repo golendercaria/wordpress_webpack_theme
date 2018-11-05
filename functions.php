@@ -9,7 +9,7 @@
 	}
 
 	function fct_enqueue_style() {
-		$cssFilePath = glob( get_template_directory() . "/css/build/app.min.*.css" );
+		$cssFilePath = glob( get_template_directory() . "/css/build/app.min.css" );
 		if( !empty( $cssFilePath ) ){
 			$cssFileURI = get_template_directory_uri() . "/css/build/" . basename( $cssFilePath[0] );
 			wp_enqueue_style( "app-css", $cssFileURI, false);
