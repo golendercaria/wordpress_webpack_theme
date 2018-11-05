@@ -11,7 +11,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 // test is mode dev
 const dev = process.env.NODE_ENV === "dev";
 
-let domain = "http://localhost:8080/";
+let port = 8080;
+let domain = "http://localhost:" + port + "/";
 
 let config = {
 	entry: {
@@ -24,6 +25,7 @@ let config = {
 	},
 	watch: true,
 	cache: false,
+	devtool: "source-map",
 	devServer: {
 		// debug in front
 		overlay: true,
@@ -32,7 +34,8 @@ let config = {
 			"Access-Control-Allow-Origin": "*",
 			"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
 			"Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
-		}
+		},
+		port: port
 	},
 	module: {
 		rules: [
@@ -89,7 +92,8 @@ let config = {
 			// enable the js minification plugin
 			new UglifyJSPlugin({
 				cache: true,
-				parallel: true
+				parallel: true,
+				sourceMap: true
 			}),
 			// enable the css minification plugin
 			new OptimizeCSSAssetsPlugin({})

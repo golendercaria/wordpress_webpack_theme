@@ -22,8 +22,8 @@
 			$jsFileURI = get_template_directory_uri() . "/js/build/" . basename($jsFilePath[0]);
 		}else{
 			$jsFileURI = URL_WEBSERVER . "/js/src/app.js";
-			wp_enqueue_script( 'app-js', $jsFileURI, false );
 		}
+		wp_enqueue_script( 'app-js', $jsFileURI, false );
 	}
 
 	add_action( 'wp_enqueue_scripts', 'fct_enqueue_style' );
