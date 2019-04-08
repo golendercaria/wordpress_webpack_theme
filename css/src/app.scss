@@ -1,4 +1,4 @@
-@import "gridEngine/grid-engine.scss";
+@import "../../components/title/title.scss";
 
 html, body{
 	margin: 0;
@@ -6,8 +6,4 @@ html, body{
 }
 *{
 	box-sizing: border-box;
-}
-
-h1{
-	transform: translateY(1%);
 }

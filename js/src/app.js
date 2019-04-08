@@ -1,5 +1,9 @@
-import "../../css/src/app.scss";
-
 import { pre } from "./utilities";
+import "../../css/src/app.scss";
+import "./mobile.js";
 
-pre("If you see this message import/export work fine !");
+import "../../components/title/title.js";
+
+jQuery(document).ready(function ($) { 
+
+});

@@ -11,21 +11,23 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 // test is mode dev
 const dev = process.env.NODE_ENV === "dev";
 
-let port = 8080;
-let domain = "http://localhost:" + port + "/";
+let port = 8083;
+let domain = "https://localhost:" + port + "/";
+let folder = "wp-content/themes/editions/";
 
 let config = {
 	entry: {
-		app: './js/src/app.js',
+		app: path.resolve(__dirname) + '/js/src/app.js',
 	},
 	output: {
-	filename: dev ? "./js/src/[name].js" : './js/build/[name].min.[hash].js',
+		filename: dev ? "./js/src/[name].js" : './js/build/[name].min.js',
 		path: path.resolve(__dirname),
-		publicPath : dev ? domain : "",
+		publicPath: dev ? domain : "../../", //permet de mettre un domain sur l'ouputPath des images
+		//publicPath: path.resolve(__dirname),
 	},
 	watch: true,
 	cache: false,
-	devtool: "source-map",
+	devtool: dev ? 'inline-source-map' : 'source-map',
 	devServer: {
 		// debug in front
 		overlay: true,
@@ -35,7 +37,8 @@ let config = {
 			"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
 			"Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
 		},
-		port: port
+		port: port,
+		https: true
 	},
 	module: {
 		rules: [
@@ -52,7 +55,13 @@ let config = {
 			{
 				test: /\.(sass|scss)$/,
 				use: [
-					dev ? "style-loader" : MiniCssExtractPlugin.loader,
+					//dev ? "style-loader" : MiniCssExtractPlugin.loader,
+					dev ? {
+						loader: "style-loader",
+						options: {
+							"sourceMap": true
+						}
+					} : MiniCssExtractPlugin.loader,
 					'css-loader',
 					{
 						loader: 'postcss-loader',
@@ -68,18 +77,38 @@ let config = {
 					'sass-loader'
 				]
 			},
-			{ 
-				test: /\.(png|jpg|gif)$/i,
+			/*{ 
+				test: /\.(png|jpg|gif|svg)$/i,
 				use: [
 					{
 						loader: 'url-loader',
+						
 						options: {
-							limit: 8192, //limit for convert base64
-							outputPath: 'img/',
-							name: "[name].[ext]"
+							limit: 100, //limit for convert base64
+							outputPath: 'img',
+							//useRelativePath: true,
+							name: "[name].[ext]",
+							//publicPath: dev ? "" : "../../"
+
+			
+
 						}
-					}
+						
+				t	}
 				]
+			}*/
+			{
+				test: /\.(png|jpg|gif|svg)$/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: "[name].[ext]",
+							outputPath: "img",
+							//publicPath: dev ? path.resolve(__dirname) : domain + folder
+						},
+					},
+				],
 			}
 		]
 	},
@@ -98,12 +127,16 @@ let config = {
 			// enable the css minification plugin
 			new OptimizeCSSAssetsPlugin({})
 		]
+	},
+	//if Wordpress load jQuery
+	externals: {
+		jquery: 'jQuery'
 	}
 }
 
 if (!dev) { 
 	config.plugins.push(new MiniCssExtractPlugin({
-		filename: dev ? './css/build/[name].css' : './css/build/[name].min.[hash].css'
+		filename: dev ? './css/build/[name].css' : './css/build/[name].min.css'
 	}))
 }
 
